@@ -6,15 +6,18 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [Header("Ball")]
     [SerializeField] private int playerScore;
     [SerializeField] private GameObject ballPrefab;
     [SerializeField] private GameObject[] ballPosition;
 
+    [Header("CueBall")]
     [SerializeField] private GameObject cueBall;
     [SerializeField] private GameObject ballLine;
 
+    [Header("Shoot")]
     [SerializeField] private float xInput;
-    
+    [SerializeField] private float forceBall;
     void Start()
     {
         instance = this;
@@ -32,6 +35,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         RotataBall();
+        
+        if (Input.GetKey("space"))
+        {
+            ShootBall();
+        }
     }
 
     void SetBalls(BallColor color,int pos)
@@ -45,5 +53,12 @@ public class GameManager : MonoBehaviour
     {
         xInput = Input.GetAxis("Horizontal");
         cueBall.transform.Rotate(new Vector3(0f,xInput,0f));
+    }
+
+    void ShootBall()
+    {
+        Rigidbody rd = cueBall.GetComponent<Rigidbody>();
+        rd.AddRelativeForce(Vector3.forward * forceBall,ForceMode.Impulse);
+        ballLine.SetActive(false);
     }
 }
