@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int playerScore;
     [SerializeField] private GameObject ballPrefab;
     [SerializeField] private GameObject[] ballPosition;
+
+    [SerializeField] private GameObject cueBall;
+    [SerializeField] private GameObject ballLine;
+
+    [SerializeField] private float xInput;
     
     void Start()
     {
@@ -26,7 +31,7 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
-        
+        RotataBall();
     }
 
     void SetBalls(BallColor color,int pos)
@@ -34,5 +39,11 @@ public class GameManager : MonoBehaviour
         GameObject ball = Instantiate(ballPrefab, ballPosition[pos].transform.position, Quaternion.identity);
         Ball b = ball.GetComponent<Ball>();
         b.SetColorAndPoint(color);
+    }
+
+    void RotataBall()
+    {
+        xInput = Input.GetAxis("Horizontal");
+        cueBall.transform.Rotate(new Vector3(0f,xInput,0f));
     }
 }
