@@ -17,6 +17,11 @@ public class GameManager : MonoBehaviour
         SetBalls(BallColor.White, 0);
         SetBalls(BallColor.Red, 1);
         SetBalls(BallColor.Yellow, 2);
+        SetBalls(BallColor.Green, 3);
+        SetBalls(BallColor.Brown, 4);
+        SetBalls(BallColor.Blue, 5);
+        SetBalls(BallColor.Pink, 6);
+        SetBalls(BallColor.Black, 7);
     }
     
     void Update()

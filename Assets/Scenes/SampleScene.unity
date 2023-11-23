@@ -561,14 +561,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 201496743}
-  - {fileID: 1200431247}
-  - {fileID: 483764247}
-  - {fileID: 301695608}
   - {fileID: 1298021644}
-  - {fileID: 1707595915}
   - {fileID: 1077519190}
+  - {fileID: 301695608}
+  - {fileID: 483764247}
+  - {fileID: 1200431247}
+  - {fileID: 201496743}
   - {fileID: 1887801241}
+  - {fileID: 1707595915}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &695304006
@@ -967,7 +967,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1115330004
 Transform:
   m_ObjectHideFlags: 0
@@ -1055,6 +1055,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1404564423}
+  - component: {fileID: 1404564424}
   m_Layer: 0
   m_Name: Referee
   m_TagString: Untagged
@@ -1077,6 +1078,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1404564424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404564422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e95bb5bfcf35873479f0de53d3549b1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerScore: 0
+  ballPrefab: {fileID: 5092556711603197403, guid: 90edec13db157d741949d85ab561aed6, type: 3}
+  ballPosition:
+  - {fileID: 1298021643}
+  - {fileID: 1077519189}
+  - {fileID: 301695607}
+  - {fileID: 483764246}
+  - {fileID: 1200431246}
+  - {fileID: 201496742}
+  - {fileID: 1887801240}
+  - {fileID: 1707595914}
 --- !u!1 &1468890649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1417,5 +1441,5 @@ SceneRoots:
   - {fileID: 695304007}
   - {fileID: 2102187931}
   - {fileID: 1115330004}
-  - {fileID: 1404564423}
   - {fileID: 525987492}
+  - {fileID: 1404564423}
