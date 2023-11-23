@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,9 +19,15 @@ public class GameManager : MonoBehaviour
     [Header("Shoot")]
     [SerializeField] private float xInput;
     [SerializeField] private float forceBall;
+
+    [Header("Shoot")] 
+    [SerializeField] private GameObject camera;
     void Start()
     {
         instance = this;
+
+        camera = Camera.main.gameObject;
+        CameraBehindBall();
         
         SetBalls(BallColor.White, 0);
         SetBalls(BallColor.Red, 1);
@@ -40,12 +47,19 @@ public class GameManager : MonoBehaviour
         {
             ShootBall();
         }
+
+        if (Input.GetKey("backspace"))
+        {
+            StopBall();
+        }
     }
 
     void SetBalls(BallColor color,int pos)
     {
         GameObject ball = Instantiate(ballPrefab, ballPosition[pos].transform.position, Quaternion.identity);
         Ball b = ball.GetComponent<Ball>();
+        Rigidbody rd = ball.GetComponent<Rigidbody>();
+        rd.drag = 1;
         b.SetColorAndPoint(color);
     }
 
@@ -57,8 +71,29 @@ public class GameManager : MonoBehaviour
 
     void ShootBall()
     {
+        camera.transform.parent = null;
         Rigidbody rd = cueBall.GetComponent<Rigidbody>();
         rd.AddRelativeForce(Vector3.forward * forceBall,ForceMode.Impulse);
         ballLine.SetActive(false);
+    }
+
+    void CameraBehindBall()
+    {
+        camera.transform.parent = cueBall.transform.transform;
+        camera.transform.position = cueBall.transform.position + new Vector3(0f,50f,0f);
+    }
+
+    void StopBall()
+    {
+        camera.transform.parent = null;
+            
+        Rigidbody rd = cueBall.GetComponent<Rigidbody>();
+        rd.velocity = Vector3.zero;
+        rd.angularVelocity = Vector3.zero;
+        
+        cueBall.transform.eulerAngles = Vector3.zero;
+        CameraBehindBall();
+        camera.transform.eulerAngles = new Vector3(90f, 0f, -90f);
+        ballLine.SetActive(true);
     }
 }
