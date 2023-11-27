@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     [Header("CueBall")]
     [SerializeField] private GameObject cueBall;
+    public GameObject CueBall { get; set; }
     [SerializeField] private GameObject ballLine;
 
     [Header("Shoot")]
@@ -91,6 +93,7 @@ public class GameManager : MonoBehaviour
     void ShootBall()
     {
         camera.transform.parent = null;
+        
         Rigidbody rd = cueBall.GetComponent<Rigidbody>();
         rd.AddRelativeForce(Vector3.forward * forceBall,ForceMode.Impulse);
         ballLine.SetActive(false);
@@ -98,8 +101,8 @@ public class GameManager : MonoBehaviour
 
     void CameraBehindBall()
     {
-        camera.transform.parent = cueBall.transform.transform;
-        camera.transform.position = cueBall.transform.position + new Vector3(0f,50f,0f);
+        /*camera.transform.parent = cueBall.transform.transform;
+        camera.transform.position = cueBall.transform.position + new Vector3(0f,50f,0f);*/
     }
 
     void StopBall()
