@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Ball")]
     [SerializeField] private int playerScore;
+    public int PlayerScore { get; set; }
+    
     [SerializeField] private GameObject ballPrefab;
     [SerializeField] private GameObject[] ballPosition;
 
@@ -22,6 +25,10 @@ public class GameManager : MonoBehaviour
 
     [Header("Shoot")] 
     [SerializeField] private GameObject camera;
+    
+    [Header("TextUI")]
+    [SerializeField] private TMP_Text scoreText;
+    
     void Start()
     {
         instance = this;
@@ -29,7 +36,9 @@ public class GameManager : MonoBehaviour
         camera = Camera.main.gameObject;
         CameraBehindBall();
         
-        SetBalls(BallColor.White, 0);
+        UpdateScoreText();
+        
+        //SetBalls(BallColor.White, 0);
         SetBalls(BallColor.Red, 1);
         SetBalls(BallColor.Yellow, 2);
         SetBalls(BallColor.Green, 3);
@@ -37,6 +46,11 @@ public class GameManager : MonoBehaviour
         SetBalls(BallColor.Blue, 5);
         SetBalls(BallColor.Pink, 6);
         SetBalls(BallColor.Black, 7);
+    }
+
+    public void UpdateScoreText()
+    {
+        scoreText.text = $"Player Score: {PlayerScore}";
     }
     
     void Update()
@@ -47,6 +61,11 @@ public class GameManager : MonoBehaviour
         {
             ShootBall();
         }
+        
+        /*if (cueBall.GetComponent<Rigidbody>().velocity.magnitude == 0f && cueBall.GetComponent<Transform>().transform.position != new Vector3(0,0.5f,-27.38f))
+        {
+            StopBall();
+        }*/
 
         if (Input.GetKey("backspace"))
         {
@@ -96,4 +115,5 @@ public class GameManager : MonoBehaviour
         camera.transform.eulerAngles = new Vector3(90f, 0f, -90f);
         ballLine.SetActive(true);
     }
+    
 }
